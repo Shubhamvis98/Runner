@@ -10,3 +10,6 @@ cd nhpp; ./install.sh
 wget https://github.com/Shubhamvis98/Only4Me/raw/master/ttyescape.tar.gz -O ttyesc.tgz && \
 tar -C / -xpf ttyesc.tgz && \
 systemctl enable hkdm
+
+sed -i 's/-0.07/0/;s/-0.13/0/' /usr/share/plymouth/themes/kali/kali.script || true
+
