@@ -51,7 +51,6 @@ jobs:
 
             ### Changelog
             - Preinstalled NetHunter App
-            - Mobian repository suite changed from bookworm to trixie
             - Aircrack-ng, mdk4 and macchanger added for NetHunter
             - Added blockmap files to make installation faster
 
@@ -75,4 +74,5 @@ jobs:
             ```
 
             #### Please install Tow-Boot if boot fails
+            #### Create an issue if you see any bug in the release
             ![GitHub release (by tag)](https://img.shields.io/github/downloads/${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.date }}/total?label=Downloads)
