@@ -1,4 +1,4 @@
-name: Kali PinePhone Release
+name: Kali PinePhone/Pro Release
 
 on: [workflow_dispatch]
 
