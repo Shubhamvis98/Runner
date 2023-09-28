@@ -1,0 +1,49 @@
+name: Kali PinePhone Test Release
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set Custom Variables
+        id: vars
+        run: |
+          echo "date=$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+          echo "repository=shubhamvis98/Only4Me" >> $GITHUB_OUTPUT
+
+### Build Code Starts from Here
+
+      - name: Clone Repository
+        run: |
+          sudo apt update
+          sudo apt install -y debootstrap systemd-container rsync qemu-user-static bmap-tools
+          git clone https://github.com/Shubhamvis98/kali-pinephone build
+          cp custom.sh build
+
+      - name: Build
+        run: |
+          cd build
+          chmod +x build.sh
+          sudo ./build.sh -cb -t pinephone -m bookworm -e xfce
+          #sudo ./build.sh -cb -t pinephonepro -m bookworm
+          for i in *.img.xz; do sha1sum ${i} > ${i}.sha1; done
+
+### Build Code Ends Here
+
+      - name: Upload Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GH_TOKEN: ${{ github.token }}
+        with:
+          generate_release_notes: false
+          prerelease: false
+          tag_name: ${{ steps.vars.outputs.date }}
+          name: Release ${{ steps.vars.outputs.date }}
+          files: build/*.img*
+          token: ${{ secrets.RELEASE_TOKEN }}
+          repository: ${{ steps.vars.outputs.repository }}
+          body: Test Release
