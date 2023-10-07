@@ -5,7 +5,7 @@ mytmp=/ztmpz
 
 # Install NetHunter
 cd $mytmp
-apt install -y python-is-python3 python3-psutil macchanger mdk4 aircrack-ng gir1.2-notify-0.7 git kbd cryptsetup osk-sdl cryptsetup-initramfs
+apt install -y python-is-python3 python3-psutil macchanger mdk4 aircrack-ng gir1.2-notify-0.7 git kbd #cryptsetup osk-sdl cryptsetup-initramfs
 git clone https://github.com/shubhamvis98/nethunter-pinephone nhpp
 cd nhpp; ./install.sh
 
