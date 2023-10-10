@@ -19,6 +19,7 @@ sed -i 's/-0.07/0/;s/-0.13/0/' /usr/share/plymouth/themes/kali/kali.script || tr
 
 # Install kalitorify
 cd $mytmp
+apt install -y tor iptables
 git clone https://github.com/brainfucksec/kalitorify ktor
 cd ktor
 DATA_DIR=/usr/share
