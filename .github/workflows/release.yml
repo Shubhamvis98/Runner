@@ -28,8 +28,8 @@ jobs:
         run: |
           cd build
           chmod +x build.sh
-          sudo ./build.sh -cb -t pinephone -m bookworm -s custom.sh
-          sudo ./build.sh -cb -t pinephonepro -m bookworm -s custom.sh
+          sudo ./build.sh -cb -t pinephone -s custom.sh
+          sudo ./build.sh -cb -t pinephonepro -s custom.sh
           for i in *.img.xz; do sha1sum ${i} > ${i}.sha1; done
 
 ### Build Code Ends Here
