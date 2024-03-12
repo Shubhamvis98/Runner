@@ -6,7 +6,7 @@ jobs:
   build:
     permissions: write-all
     runs-on: ubuntu-latest
-    timeout-minutes: 200
+    # timeout-minutes: 200
     steps:
       - uses: actions/checkout@v4
 
@@ -49,11 +49,6 @@ jobs:
           repository: ${{ steps.vars.outputs.repository }}
           body: |
             **Default User/Pass:** kali/8888
-
-            ### Changelog
-            - Preinstalled NetHunter App
-            - Aircrack-ng, mdk4 and macchanger added for NetHunter
-            - Added blockmap files to make installation faster
 
             ### Installation:
 
