@@ -4,10 +4,9 @@ export DEBIAN_FRONTEND=noninteractive
 mytmp=/ztmpz
 
 # Install NetHunter
-cd $mytmp
-apt install -y python-is-python3 python3-psutil macchanger mdk4 aircrack-ng gir1.2-notify-0.7 git kbd #cryptsetup osk-sdl cryptsetup-initramfs
-git clone https://github.com/shubhamvis98/nethunter-pinephone nhpp
-cd nhpp; ./install.sh
+sudo sh -c "$(curl -fsSL https://repo.fossfrog.in/setup.sh)"
+apt update
+apt install nethunter network-scanner hijacker -y
 
 # Install ttyescape
 cd $mytmp
@@ -31,3 +30,5 @@ mkdir -p $DATA_DIR/$PROGRAM_NAME/data
 mkdir -p $BACKUP_DIR/$PROGRAM_NAME/backups
 install -Dm644 data/* $DATA_DIR/$PROGRAM_NAME/data
 
+cd /
+rm -rf $mytmp
