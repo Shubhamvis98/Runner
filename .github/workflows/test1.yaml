@@ -27,7 +27,8 @@ jobs:
           git clone -b 20240331 https://github.com/Shubhamvis98/kali-pinephone build
           cp custom.sh build
           LOOP=`losetup -f`
-          sudo rm $LOOP; mknod $LOOP b 7 11
+          sudo rm $LOOP || echo
+          mknod $LOOP b 7 11
 
       - name: Build
         run: |
