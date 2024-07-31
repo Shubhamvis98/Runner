@@ -22,6 +22,7 @@ jobs:
 
       - name: Clone Repository
         run: |
+          apt install sudo -y
           sudo apt update
           sudo apt install -y debootstrap systemd-container rsync qemu-user-static bmap-tools
           git clone -b 20240331 https://github.com/Shubhamvis98/kali-pinephone build
