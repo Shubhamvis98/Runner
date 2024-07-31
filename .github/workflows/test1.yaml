@@ -1,6 +1,9 @@
 name: Kali PinePhone/Pro Release Test
 
-on: [workflow_dispatch]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -26,7 +29,7 @@ jobs:
           apt install -y sudo git fdisk debootstrap systemd-container rsync qemu-user-static bmap-tools
           git clone -b 20240331 https://github.com/Shubhamvis98/kali-pinephone build
           cp custom.sh build
-          LOOP=`losetup -f`
+          LOOP=`losetup -f | awk '{print $1}'`
           sudo rm $LOOP || echo
           mknod $LOOP b 7 11
 
