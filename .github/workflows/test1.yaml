@@ -17,4 +17,4 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Run a command in the custom Linux Mint container
-      run: echo "Hello from inside the Linux Mint container!"
+      run: cat /etc/os-release
