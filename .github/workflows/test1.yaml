@@ -1,0 +1,20 @@
+# .github/workflows/main.yml
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: shubhamvis98/kernel-builder
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Run a command in the custom Linux Mint container
+      run: echo "Hello from inside the Linux Mint container!"
