@@ -14,7 +14,7 @@ jobs:
         id: vars
         run: |
           echo "date=$(date +%Y%m%d)" >> $GITHUB_OUTPUT
-          echo "repository=shubhamvis98/kali-pinephone" >> $GITHUB_OUTPUT
+          echo "repository=shubhamvis98/Runner" >> $GITHUB_OUTPUT
 
 ### Build Code Starts from Here
 
