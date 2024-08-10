@@ -1,4 +1,4 @@
-name: SDM845 Release
+name: Kali SDM845 Release
 
 on: [workflow_dispatch]
 
@@ -59,23 +59,32 @@ jobs:
 
             ### Installation:
 
-            #### From PinePhone/Pro:
+            **Supported Devices:**
+            - SHIFT SHIFT6mq(axolotl)
+            - Xiaomi Poco F1 (beryllium ebbg/tianma)
+            - Oneplus 6 (enchilada)
+            - Oneplus 6T (fajita)
+            - Xiaomi Mi MIX 2S (polaris)
+
+            ### Install on SDCard:
             ```
-            unxz ${IMAGE_FILE}.xz && bmaptool copy ${IMAGE_FILE} /dev/mmcblkX
-            or
-            unxz -c ${IMAGE_FILE}.xz | dd of=/dev/mmcblkX bs=1M oflag=sync status=progress
-            X: Storage Device
+            unxz kali_phosh_sdm845_YYYYMMDD.img.xz
+            simg2img kali_phosh_sdm845_YYYYMMDD.img rootfs_ext4.img
+            dd if=rootfs_ext4.img of=/dev/sdX bs=1M oflag=sync status=progress
+            and at last, flash boot.img using fastboot
+            fastboot flash boot boot-{model}.img
             ```
 
-            #### From PC [Use Tow-Boot's Mass Storage]:
-            While booting press Vol-up to boot into Mass Storage, led color will be blue
+            ### Install on EMMC (fastboot method):
+            **Boot your device into fastboot and run below commands:**
             ```
-            unxz ${IMAGE_FILE}.xz && bmaptool copy ${IMAGE_FILE} /dev/sdX
-            or
-            unxz -c ${IMAGE_FILE}.xz | dd of=/dev/sdX bs=1M oflag=sync status=progress
-            X: Storage Device
+            unxz kali_phosh_sdm845_YYYYMMDD.img.xz
+            fastboot flash userdata kali_phosh_sdm845_YYYYMMDD.img
+            fastboot flash boot boot-{model}.img
             ```
+            ### WARNING: This will wipe your phone. So, I won't recommend to flash it in your daily driver, but if your device supports external sdcard, go ahead (-;
 
-            #### Please install Tow-Boot if boot fails
             #### Create an issue if you see any bug in the release
+            ### [If you find my work useful and would like to support it, consider making a donation](https://fossfrog.in/donate/)
+
             ![GitHub release (by tag)](https://img.shields.io/github/downloads/${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.date }}/total?label=Downloads)
