@@ -52,7 +52,9 @@ jobs:
           prerelease: false
           tag_name: ${{ steps.vars.outputs.date }}
           name: Release ${{ steps.vars.outputs.date }}
-          files: build/*.img* sha1sum
+          files: |
+            build/*.img*
+            build/sha1sum
           token: ${{ secrets.RELEASE_TOKEN }}
           repository: ${{ steps.vars.outputs.repository }}
           body: |
