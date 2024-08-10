@@ -35,7 +35,7 @@ jobs:
           cd build
           chmod +x build.sh
           sudo ./build.sh -c -t sdm845
-          for i in *.img.xz; do sha1sum ${i} >> sha1sum; done
+          for i in *.img; do sha1sum ${i} >> sha1sum; done
 
 ### Build Code Ends Here
 
