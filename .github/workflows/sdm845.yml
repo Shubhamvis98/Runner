@@ -21,7 +21,7 @@ jobs:
       - name: Clone Repository
         run: |
           sudo apt update
-          sudo apt install -y debootstrap systemd-container rsync qemu-user-static bmap-tools
+          sudo apt install -y debootstrap systemd-container rsync qemu-user-static bmap-tools android-sdk-libsparse-utils
           git clone -b qcom https://github.com/Shubhamvis98/kali-pinephone build
           cp custom.sh build
 
