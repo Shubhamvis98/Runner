@@ -35,7 +35,7 @@ jobs:
           cd build
           chmod +x build.sh
           sudo ./build.sh -cb -t pinephone -s custom.sh
-          sudo ./build.sh -cb -t pinephonepro -s custom.sh
+          # sudo ./build.sh -cb -t pinephonepro -s custom.sh
           for i in *.img*; do sha1sum ${i} >> sha1sum; done
 
 ### Build Code Ends Here
