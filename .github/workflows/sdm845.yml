@@ -35,7 +35,7 @@ jobs:
           cd build
           chmod +x build.sh
           sudo ./build.sh -c -t sdm845 -s custom.sh
-          for i in *.img.xz; do sha1sum ${i} > ${i}.sha1; done
+          for i in *.img.xz; do sha1sum ${i} >> sha1sum; done
 
 ### Build Code Ends Here
 
@@ -49,7 +49,7 @@ jobs:
           prerelease: false
           tag_name: ${{ steps.vars.outputs.date }}
           name: Release ${{ steps.vars.outputs.date }}
-          files: build/*.img*
+          files: build/*.img* sha1sum
           token: ${{ secrets.RELEASE_TOKEN }}
           repository: ${{ steps.vars.outputs.repository }}
           body: |
