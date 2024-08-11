@@ -34,7 +34,7 @@ jobs:
         run: |
           cd build
           chmod +x build.sh
-          sudo ./build.sh -c -m trixie -t sdm845 -s custom.sh
+          sudo ./build.sh -c -t sdm845 -s custom.sh
           for i in *.img*; do sha1sum ${i} >> sha1sum; done
 
 ### Build Code Ends Here
