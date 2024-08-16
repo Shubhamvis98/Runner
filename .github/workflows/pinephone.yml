@@ -49,7 +49,7 @@ jobs:
           generate_release_notes: false
           prerelease: false
           tag_name: ${{ steps.vars.outputs.date }}
-          name: Release ${{ steps.vars.outputs.date }}
+          name: PinePhone/Pro Release ${{ steps.vars.outputs.date }}
           files: |
             build/*.img*
             build/sha1sum
