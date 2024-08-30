@@ -34,8 +34,9 @@ jobs:
         run: |
           cd build
           chmod +x build.sh
-          sudo ./build.sh -c -t sdm845 -s custom.sh
-          for i in *.img*; do sha1sum ${i} >> sha1sum; done
+          sudo ./build.sh -t sdm845 -s custom.sh
+          tar -xpzf "kali_phosh_sdm845_`date +%Y%m%d`.tar.xz" boot*img kali_phosh*img
+          for i in *.tar.xz; do sha1sum ${i} >> sha1sum; done
 
 ### Build Code Ends Here
 
@@ -50,7 +51,7 @@ jobs:
           tag_name: ${{ steps.vars.outputs.date }}
           name: SDM845 Release ${{ steps.vars.outputs.date }}
           files: |
-            build/*.img*
+            build/*.tar.xz
             build/sha1sum
           token: ${{ secrets.RELEASE_TOKEN }}
           repository: ${{ steps.vars.outputs.repository }}
@@ -68,7 +69,7 @@ jobs:
 
             ### Install on SDCard:
             ```
-            unxz kali_phosh_sdm845_YYYYMMDD.img.xz
+            tar -xpf kali_phosh_sdm845_YYYYMMDD.tar.xz
             simg2img kali_phosh_sdm845_YYYYMMDD.img rootfs_ext4.img
             dd if=rootfs_ext4.img of=/dev/sdX bs=1M oflag=sync status=progress
             and at last, flash boot.img using fastboot
@@ -78,7 +79,7 @@ jobs:
             ### Install on EMMC (fastboot method):
             **Boot your device into fastboot and run below commands:**
             ```
-            unxz kali_phosh_sdm845_YYYYMMDD.img.xz
+            tar -xpf kali_phosh_sdm845_YYYYMMDD.tar.xz
             fastboot flash userdata kali_phosh_sdm845_YYYYMMDD.img
             fastboot flash boot boot-{model}.img
             ```
