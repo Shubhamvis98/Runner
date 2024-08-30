@@ -25,6 +25,8 @@ jobs:
         run: |
           git clone git@github.com:Shubhamvis98/test.git test
           cd test
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
 
       # Copy the new or modified files from the source repository to the target repository
       - name: Copy files to target repository
