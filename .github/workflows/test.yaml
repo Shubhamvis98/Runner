@@ -23,13 +23,13 @@ jobs:
       # Clone the target repository where the changes will be pushed
       - name: Clone the target repository
         run: |
-          git clone https://github.com/Shubhamvis98/kali-pinephone test
+          git clone https://github.com/Shubhamvis98/test test
           cd test
 
       # Copy the new or modified files from the source repository to the target repository
       - name: Copy files to target repository
         run: |
-          cp ../newfile.txt ./
+          echo hello > new.txt
           # Add more commands here if you need to copy additional files
 
       # Configure Git with the GitHub Actions bot identity
