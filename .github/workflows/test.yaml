@@ -14,12 +14,6 @@ jobs:
       - name: Checkout source repository
         uses: actions/checkout@v3
 
-      # Create or modify files in the source repository
-      - name: Create or modify files
-        run: |
-          echo "This is a new file created by GitHub Actions" > newfile.txt
-          # Add your commands here to create or modify files
-
       # Clone the target repository where the changes will be pushed
       - name: Clone the target repository
         run: |
@@ -31,8 +25,9 @@ jobs:
       # Copy the new or modified files from the source repository to the target repository
       - name: Copy files to target repository
         run: |
+          pwd
           echo hello > new.txt
-          # Add more commands here if you need to copy additional files
+          echo hello > test/new.txt
 
       # Configure Git with the GitHub Actions bot identity
       - name: Configure git
