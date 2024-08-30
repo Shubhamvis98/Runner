@@ -23,7 +23,7 @@ jobs:
       # Clone the target repository where the changes will be pushed
       - name: Clone the target repository
         run: |
-          git clone git@github.com:Shubhamvis98/test.git test
+          git clone https://${GH_TOKEN}@github.com/shubhamvis98/test.git
           cd test
         env:
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
