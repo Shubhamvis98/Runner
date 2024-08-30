@@ -1,0 +1,38 @@
+name: Push to Another Repository
+
+on: [workflow_dispatch]
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v3
+
+      - name: Create or modify files
+        run: |
+          echo "Some content" > newfile.txt
+          # Add your commands here to create or modify files
+
+      - name: Configure git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Clone the target repository
+        run: |
+          git clone https://${GH_TOKEN}@github.com/shubhamvis98/test.git
+          cd test
+
+      - name: Copy files to target repository
+        run: |
+          cp ../newfile.txt ./
+          # Copy additional files as needed
+
+      - name: Commit and push changes to target repository
+        run: |
+          git add .
+          git commit -m "Automated commit by GitHub Actions"
+          git push origin main
+        working-directory: test
