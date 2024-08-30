@@ -29,27 +29,24 @@ jobs:
           echo hello > new.txt
           echo hello > test/new.txt
           ls
+          echo
           ls test
+          echo
 
       # Configure Git with the GitHub Actions bot identity
       - name: Configure git
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        working-directory: test
-
       # Commit the changes to the target repository
       - name: Commit changes
         run: |
           cd test
           git add .
           git commit -m "Automated commit by GitHub Actions"
-        working-directory: test
 
       # Push the changes back to the target repository
       - name: Push changes to target repository
         run: |
-          pwd
           cd test
           git push origin main
-        working-directory: test
