@@ -22,7 +22,7 @@ jobs:
 
       - name: Clone the target repository
         run: |
-          git clone https://${RELEASE_TOKEN}@github.com/shubhamvis98/test.git
+          git clone https://${{ secrets.RELEASE_TOKEN }}@github.com/shubhamvis98/test.git
           cd test
 
       - name: Copy files to target repository
