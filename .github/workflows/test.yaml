@@ -23,7 +23,7 @@ jobs:
       # Clone the target repository where the changes will be pushed
       - name: Clone the target repository
         run: |
-          git clone https://${{ secrets.RELEASE_TOKEN }}@github.com/shubhamvis98/test.git
+          git clone https://github.com/shubhamvis98/test.git
           cd test
 
       # Copy the new or modified files from the source repository to the target repository
