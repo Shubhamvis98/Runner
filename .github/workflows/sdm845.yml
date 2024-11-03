@@ -14,7 +14,7 @@ jobs:
         id: vars
         run: |
           echo "date=$(date +%Y%m%d)" >> $GITHUB_OUTPUT
-          echo "repository=shubhamvis98/kali-phone" >> $GITHUB_OUTPUT
+          echo "repository=shubhamvis98/kali-pinephone" >> $GITHUB_OUTPUT
 
 ### Build Code Starts from Here
 
@@ -36,7 +36,7 @@ jobs:
           chmod +x build.sh
           sudo ./build.sh -t sdm845 -s custom.sh
           tar -xpzf "kali_phosh_sdm845_`date +%Y%m%d`.tar.xz" boot*img kali_phosh*img
-          for i in *.tar.xz; do sha1sum ${i} >> sha1sum; done
+          sha1sum *.tar.xz > sha1sum
 
 ### Build Code Ends Here
 
