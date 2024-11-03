@@ -32,9 +32,9 @@ jobs:
 
       - name: Build
         run: |
+          cd build
           echo world > kali_phosh.tar.xz
           echo hello > boot.img
-          echo cd build
           echo chmod +x build.sh
           echo sudo ./build.sh -t sdm845 -s custom.sh
           echo tar -cpzf "kali_phosh_sdm845_`date +%Y%m%d`.tar.xz" boot*img kali_phosh*img
