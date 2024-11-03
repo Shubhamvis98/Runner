@@ -32,6 +32,7 @@ jobs:
 
       - name: Build
         run: |
+          mkdir build
           cd build
           echo world > kali_phosh.tar.xz
           echo hello > boot.img
