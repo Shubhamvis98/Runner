@@ -6,6 +6,7 @@ mytmp=/ztmpz
 # Install NetHunter
 sudo sh -c "$(curl -fsSL https://repo.fossfrog.in/setup.sh)"
 apt update
+apt upgrade -y
 apt install nethunter network-scanner -y
 
 # Install ttyescape
