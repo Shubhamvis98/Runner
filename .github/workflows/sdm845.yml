@@ -20,23 +20,25 @@ jobs:
 
       - name: Clone Repository
         run: |
-          sudo apt update
-          sudo apt install -y debootstrap systemd-container rsync qemu-user-static bmap-tools android-sdk-libsparse-utils
-          git clone https://github.com/Shubhamvis98/kali-pinephone build
-          cp custom.sh build
+          echo sudo apt update
+          echo sudo apt install -y debootstrap systemd-container rsync qemu-user-static bmap-tools android-sdk-libsparse-utils
+          echo git clone https://github.com/Shubhamvis98/kali-pinephone build
+          echo cp custom.sh build
 
       - name: Download base.tgz
         run: |
-          pip install gdown
-          gdown --fuzzy 'https://drive.google.com/file/d/1arNys82V96bnwEWPjMTwq26ro0K8af0e/view?usp=sharing' -O build/base.tgz
+          echo pip install gdown
+          echo gdown --fuzzy 'https://drive.google.com/file/d/1arNys82V96bnwEWPjMTwq26ro0K8af0e/view?usp=sharing' -O build/base.tgz
 
       - name: Build
         run: |
-          cd build
-          chmod +x build.sh
-          sudo ./build.sh -t sdm845 -s custom.sh
-          tar -cpzf "kali_phosh_sdm845_`date +%Y%m%d`.tar.xz" boot*img kali_phosh*img
-          sha1sum *.tar.xz > sha1sum
+          echo world > kali_phosh.tar.xz
+          echo hello > boot.img
+          echo cd build
+          echo chmod +x build.sh
+          echo sudo ./build.sh -t sdm845 -s custom.sh
+          echo tar -cpzf "kali_phosh_sdm845_`date +%Y%m%d`.tar.xz" boot*img kali_phosh*img
+          echo sha1sum *.tar.xz > sha1sum
 
 ### Build Code Ends Here
 
