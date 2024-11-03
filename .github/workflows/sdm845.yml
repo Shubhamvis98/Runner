@@ -35,7 +35,7 @@ jobs:
           cd build
           chmod +x build.sh
           sudo ./build.sh -c -t sdm845 -s custom.sh
-          tar -xpzf "kali_phosh_sdm845_`date +%Y%m%d`.tar.xz" boot*img kali_phosh*img
+          tar -cpzf "kali_phosh_sdm845_`date +%Y%m%d`.tar.xz" boot*img kali_phosh*img
           sha1sum *.tar.xz > sha1sum
 
 ### Build Code Ends Here
