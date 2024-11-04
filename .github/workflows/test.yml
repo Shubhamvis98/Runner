@@ -20,6 +20,7 @@ jobs:
 
       - name: Clone Repository
         run: |
+          mkdir build
           echo hello > build/a.tar.xz
           echo world > build/sha1sum
 
