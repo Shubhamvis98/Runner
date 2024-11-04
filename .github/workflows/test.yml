@@ -1,4 +1,4 @@
-name: Test Release
+name: Kali SDM845 Release
 
 on: [workflow_dispatch]
 
@@ -20,8 +20,8 @@ jobs:
 
       - name: Clone Repository
         run: |
-          echo hello > hello
-          echo world > world
+          echo hello > build/a.tar.xz
+          echo world > build/sha1sum
 
 ### Build Code Ends Here
 
@@ -36,10 +36,41 @@ jobs:
           tag_name: ${{ steps.vars.outputs.date }}
           name: SDM845 Release ${{ steps.vars.outputs.date }}
           files: |
-            hello
-            world
-          token: ${{ secrets.GITHUB_TOKEN }}
+            build/*.tar.xz
+            build/sha1sum
+          token: ${{ secrets.RELEASE_TOKEN }}
           repository: ${{ steps.vars.outputs.repository }}
           body: |
             **Default User/Pass:** kali/8888
+
+            ### Installation:
+
+            **Supported Devices:**
+            - SHIFT SHIFT6mq (axolotl)
+            - Xiaomi Poco F1 (beryllium ebbg/tianma)
+            - Oneplus 6 (enchilada)
+            - Oneplus 6T (fajita)
+            - Xiaomi Mi MIX 2S (polaris)
+
+            ### Install on SDCard:
+            ```
+            tar -xpf kali_phosh_sdm845_YYYYMMDD.tar.xz
+            simg2img kali_phosh_sdm845_YYYYMMDD.img rootfs_ext4.img
+            dd if=rootfs_ext4.img of=/dev/sdX bs=1M oflag=sync status=progress
+            and at last, flash boot.img using fastboot
+            fastboot flash boot boot-{model}.img
+            ```
+
+            ### Install on EMMC (fastboot method):
+            **Boot your device into fastboot and run below commands:**
+            ```
+            tar -xpf kali_phosh_sdm845_YYYYMMDD.tar.xz
+            fastboot flash userdata kali_phosh_sdm845_YYYYMMDD.img
+            fastboot flash boot boot-{model}.img
+            ```
+            ### WARNING: This will wipe your phone. So, I won't recommend to flash it in your daily driver, but if your device supports external sdcard, go ahead (-;
+
+            #### Create an issue if you see any bug in the release
+            ### [If you find my work useful and would like to support it, consider making a donation](https://fossfrog.in/donate/)
+
             ![GitHub release (by tag)](https://img.shields.io/github/downloads/${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.date }}/total?label=Downloads)
