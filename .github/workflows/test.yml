@@ -35,6 +35,9 @@ jobs:
           tag_name: testz
           repository: ${{ steps.vars.outputs.repository }}
           release_name: Release ${{ github.ref }}
+          files: |
+            build/a.tar.xz
+            build/sha1sum
           body: |
             Changes in this Release
             - First Change
