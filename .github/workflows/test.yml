@@ -28,9 +28,9 @@ jobs:
 
       - name: Upload Release
         uses: softprops/action-gh-release@v1
-        env:
-          GH_TOKEN: ${{ github.token }}
         with:
+          token: ${{ secrets.RELEASE_TOKEN }}
+          repository: ${{ steps.vars.outputs.repository }}
           draft: true
           generate_release_notes: false
           prerelease: false
@@ -39,7 +39,5 @@ jobs:
           files: |
             build/*.tar.xz
             build/sha1sum
-          token: ${{ secrets.RELEASE_TOKEN }}
-          repository: ${{ steps.vars.outputs.repository }}
           body: |
             **Default User/Pass:** kali/8888
