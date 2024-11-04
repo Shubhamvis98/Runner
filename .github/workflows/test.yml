@@ -39,7 +39,7 @@ jobs:
           files: |
             build/*.tar.xz
             build/sha1sum
-          token: ${{ secrets.RELEASE_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ steps.vars.outputs.repository }}
           body: |
             **Default User/Pass:** kali/8888
