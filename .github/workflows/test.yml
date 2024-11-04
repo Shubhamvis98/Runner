@@ -1,4 +1,4 @@
-name: Kali SDM845 Release
+name: Test
 
 on: [workflow_dispatch]
 
