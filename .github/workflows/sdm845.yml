@@ -35,8 +35,8 @@ jobs:
           cd build
           chmod +x build.sh
           sudo ./build.sh -t sdm845 -s custom.sh
-          xz kali_phosh*img
-          sha1sum *.img* > sha1sum
+          sudo xz kali_phosh*img
+          sudo sha1sum *.img* > sha1sum
 
 ### Build Code Ends Here
 
