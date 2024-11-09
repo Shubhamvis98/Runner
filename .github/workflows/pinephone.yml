@@ -34,8 +34,8 @@ jobs:
         run: |
           cd build
           chmod +x build.sh
-          sudo ./build.sh -cb -t pinephone -s custom.sh
-          sudo ./build.sh -cb -t pinephonepro -s custom.sh
+          sudo bash -e ./build.sh -cb -t pinephone -s custom.sh
+          sudo bash -e ./build.sh -cb -t pinephonepro -s custom.sh
           sha1sum *.img* > sha1sum
 
 ### Build Code Ends Here
