@@ -1,0 +1,54 @@
+diff --git a/build.sh b/build.sh
+index 0fe9ecb..67788ab 100755
+--- a/build.sh
++++ b/build.sh
+@@ -54,7 +54,8 @@ case "$device" in
+     ;;
+ esac
+ 
+-PACKAGES="${PACKAGES} kali-linux-core ${family}-support wget curl rsync systemd-timesyncd"
++PACKAGES="${PACKAGES} kali-linux-core rsync systemd-timesyncd"
++DEV_PACKAGES="${family}-support"
+ case "${environment}" in
+     phosh)
+         PACKAGES="${PACKAGES} phosh-phone phog portfolio-filemanager"
+@@ -90,13 +91,16 @@ echo '[*]Build will start in 5 seconds...'; sleep 5
+ echo '[+]Stage 1: Debootstrap'
+ [ -e ${ROOTFS}/etc ] && echo -e "[*]Debootstrap already done.\nSkipping Debootstrap..." || debootstrap --foreign --arch $arch kali-rolling ${ROOTFS} http://kali.download/kali
+ 
+-echo '[+]Stage 2: Debootstrap second stage and adding Mobian apt repo'
++echo '[+]Stage 2: Debootstrap second stage and adding Mobian/fossfrog apt repo'
+ [ -e ${ROOTFS}/etc/passwd ] && echo '[*]Second Stage already done' || nspawn-exec /debootstrap/debootstrap --second-stage
++nspawn-exec apt install curl wget -y
+ mkdir -p ${ROOTFS}/etc/apt/sources.list.d ${ROOTFS}/etc/apt/trusted.gpg.d
+ sed -i 's/main/main contrib non-free non-free-firmware/g' ${ROOTFS}/etc/apt/sources.list
+ echo "deb http://repo.mobian.org/ ${mobian_suite} main non-free-firmware" > ${ROOTFS}/etc/apt/sources.list.d/mobian.list
+ curl -L http://repo.mobian.org/mobian.gpg -o ${ROOTFS}/etc/apt/trusted.gpg.d/mobian.gpg
+-chmod 644 ${ROOTFS}/etc/apt/trusted.gpg.d/mobian.gpg
++curl -sL https://repo.fossfrog.in/fossfrog.gpg -o ${ROOTFS}/etc/apt/trusted.gpg.d/fossfrog.gpg
++curl -sL https://repo.fossfrog.in/fossfrog.list -o ${ROOTFS}/etc/apt/sources.list.d/fossfrog.list
++chmod 644 ${ROOTFS}/etc/apt/trusted.gpg.d/{fossfrog.gpg,mobian.gpg} ${ROOTFS}/etc/apt/sources.list.d/{fossfrog.list,mobian.list}
+ 
+ cat << EOF > ${ROOTFS}/etc/apt/preferences.d/00-mobian-priority
+ Package: *
+@@ -104,6 +108,12 @@ Pin: release o=Mobian
+ Pin-Priority: 700
+ EOF
+ 
++cat << EOF > ${ROOTFS}/etc/apt/preferences.d/10-fossfrog-priority
++Package: *
++Pin: release o=fossfrog
++Pin-Priority: 1000
++EOF
++
+ ROOT_UUID=`python3 -c 'from uuid import uuid4; print(uuid4())'`
+ BOOT_UUID=`python3 -c 'from uuid import uuid4; print(uuid4())'`
+ 
+@@ -126,6 +136,7 @@ EOF
+ echo '[+]Stage 3: Installing device specific and environment packages'
+ nspawn-exec apt update
+ nspawn-exec apt install -y ${PACKAGES}
++nspawn-exec apt install -y ${DEV_PACKAGES}
+ 
+ echo '[+]Stage 4: Adding some extra tweaks'
+ if [ ! -e "${ROOTFS}/etc/repart.d/50-root.conf" ]
