@@ -24,6 +24,8 @@ jobs:
           sudo apt install -y debootstrap systemd-container rsync qemu-user-static bmap-tools android-sdk-libsparse-utils
           git clone https://github.com/Shubhamvis98/kali-pinephone build
           cp custom.sh build
+          cd build
+          patch -p1 < ../my.patch
 
       - name: Download base.tgz
         run: |

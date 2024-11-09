@@ -4,9 +4,6 @@ export DEBIAN_FRONTEND=noninteractive
 mytmp=/ztmpz
 
 # Install NetHunter
-sudo sh -c "$(curl -fsSL https://repo.fossfrog.in/setup.sh)"
-apt update
-apt upgrade -y
 apt install nethunter network-scanner hijacker -y
 
 # Install ttyescape
