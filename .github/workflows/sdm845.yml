@@ -28,7 +28,7 @@ jobs:
       - name: Download base.tgz
         run: |
           pip install gdown
-          gdown --fuzzy 'https://drive.google.com/file/d/1arNys82V96bnwEWPjMTwq26ro0K8af0e/view?usp=sharing' -O build/base.tgz
+          gdown --fuzzy 'https://drive.google.com/file/d/1o0CJXqOwpO_H9LCQ4HoJqluTC6GyiWPS/view?usp=sharing' -O build/base.tgz
 
       - name: Build
         run: |
