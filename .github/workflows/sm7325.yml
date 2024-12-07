@@ -61,28 +61,16 @@ jobs:
             ### Installation:
 
             **Supported Devices:**
-            - SHIFT SHIFT6mq (axolotl)
-            - Xiaomi Poco F1 (beryllium ebbg/tianma)
-            - Oneplus 6 (enchilada)
-            - Oneplus 6T (fajita)
-            - Xiaomi Mi MIX 2S (polaris)
+            - Nothing Phone(1) (spacewar)
 
-            ### Install on SDCard:
+            ### Install on EMMC:
             ```
-            tar -xpf kali_phosh_sdm845_YYYYMMDD.tar.xz
-            simg2img kali_phosh_sdm845_YYYYMMDD.img rootfs_ext4.img
-            dd if=rootfs_ext4.img of=/dev/sdX bs=1M oflag=sync status=progress
-            and at last, flash boot.img using fastboot
+            tar -xpf kali_phosh_SOC_YYYYMMDD.tar.xz
+            simg2img kali_phosh_SOC_YYYYMMDD.img rootfs_ext4.img
+            fastboot flash userdata kali_phosh_SOC_YYYYMMDD.img
             fastboot flash boot boot-{model}.img
             ```
 
-            ### Install on EMMC (fastboot method):
-            **Boot your device into fastboot and run below commands:**
-            ```
-            tar -xpf kali_phosh_sdm845_YYYYMMDD.tar.xz
-            fastboot flash userdata kali_phosh_sdm845_YYYYMMDD.img
-            fastboot flash boot boot-{model}.img
-            ```
             ### WARNING: This will wipe your phone. So, I won't recommend to flash it in your daily driver, but if your device supports external sdcard, go ahead (-;
 
             #### Create an issue if you see any bug in the release
