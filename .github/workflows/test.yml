@@ -58,8 +58,8 @@ jobs:
           tag_name: ${{ steps.vars.outputs.date }}
           name: SDM845 Release ${{ steps.vars.outputs.date }}
           files: |
-            build/*.img*
-            build/sha1sum
+            *.img*
+            sha1sum
           body: |
             **Default User/Pass:** kali/8888
 
