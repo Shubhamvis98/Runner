@@ -11,14 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set Custom Variables
-        id: vars
-        run: |
-          echo "date=$(date +%Y%m%d)" >> $GITHUB_OUTPUT
-          echo "repository=shubhamvis98/kali-pinephone" >> $GITHUB_OUTPUT
-
-### Build Code Starts from Here
-
       - name: Build
         run: |
           mkdir build
@@ -35,7 +27,6 @@ jobs:
           path: |
             build/*.img*
             build/sha1sum
-### Build Code Ends Here
 
   release:
     name: Create Release
@@ -62,7 +53,7 @@ jobs:
           token: ${{ secrets.RELEASE_TOKEN }}
           repository: ${{ steps.vars.outputs.repository }}
           tag_name: ${{ steps.vars.outputs.date }}
-          name: SDM845 Release ${{ steps.vars.outputs.date }}
+          name: SM7325 Release ${{ steps.vars.outputs.date }}
           files: |
             *.img*
             sha1sum
