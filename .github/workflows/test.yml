@@ -43,7 +43,7 @@ jobs:
           draft: true
           generate_release_notes: false
           prerelease: false
-          token: ${{ secrets.release }}
+          token: ${{ secrets.RELEASE_TOKEN }}
           repository: ${{ steps.vars.outputs.repository }}
           tag_name: ${{ steps.vars.outputs.date }}
           name: SDM845 Release ${{ steps.vars.outputs.date }}
