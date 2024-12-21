@@ -4,19 +4,18 @@ on: [workflow_dispatch]
 
 jobs:
   build:
+    name: Build Image(s)
     permissions: write-all
     runs-on: ubuntu-latest
     # timeout-minutes: 200
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set Custom Variables
-        id: vars
-        run: |
-          echo "date=$(date +%Y%m%d)" >> $GITHUB_OUTPUT
-          echo "repository=shubhamvis98/kali-pinephone" >> $GITHUB_OUTPUT
-
-### Build Code Starts from Here
+      # - name: Set Custom Variables
+      #   id: vars
+      #   run: |
+      #     echo "date=$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+      #     echo "repository=shubhamvis98/kali-pinephone" >> $GITHUB_OUTPUT
 
       - name: Clone Repository
         run: |
@@ -24,13 +23,10 @@ jobs:
           sudo apt install -y debootstrap systemd-container rsync qemu-user-static bmap-tools android-sdk-libsparse-utils
           git clone https://github.com/Shubhamvis98/kali-pinephone build
           cp custom.sh build
-          cd build
-          patch -p1 < ../my.patch
 
       - name: Download base.tgz
         run: |
-          pip install gdown
-          gdown --fuzzy 'https://drive.google.com/file/d/1o0CJXqOwpO_H9LCQ4HoJqluTC6GyiWPS/view?usp=sharing' -O build/base.tgz
+          bash base.url
 
       - name: Build
         run: |
@@ -40,7 +36,30 @@ jobs:
           sudo bash -e ./build.sh -cb -t pinephonepro -s custom.sh
           sha1sum *.img* > sha1sum
 
-### Build Code Ends Here
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-artifacts
+          if-no-files-found: warn
+          retention-days: 7
+          path: |
+            build/*.img*
+            build/sha1sum
+
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Set Custom Variables
+        id: vars
+        run: |
+          echo "date=$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+          echo "repository=shubhamvis98/kali-pinephone" >> $GITHUB_OUTPUT
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: release-artifacts
 
       - name: Upload Release
         uses: softprops/action-gh-release@v1
@@ -53,8 +72,8 @@ jobs:
           tag_name: ${{ steps.vars.outputs.date }}
           name: PinePhone/Pro Release ${{ steps.vars.outputs.date }}
           files: |
-            build/*.img*
-            build/sha1sum
+            *.img*
+            sha1sum
           body: |
             **Default User/Pass:** kali/8888
 
