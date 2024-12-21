@@ -4,7 +4,7 @@ export DEBIAN_FRONTEND=noninteractive
 mytmp=/ztmpz
 
 # Install NetHunter
-apt install nethunter network-scanner hijacker -y
+apt install kbd nethunter network-scanner hijacker -y
 
 # Install ttyescape
 cd $mytmp
@@ -27,3 +27,4 @@ install -Dm755 kalitorify.sh $PROGRAM_DIR/$PROGRAM_NAME
 mkdir -p $DATA_DIR/$PROGRAM_NAME/data
 mkdir -p $BACKUP_DIR/$PROGRAM_NAME/backups
 install -Dm644 data/* $DATA_DIR/$PROGRAM_NAME/data
+
