@@ -81,8 +81,8 @@ jobs:
 
             ### Install on SDCard:
             ```
-            tar -xpf kali_phosh_sdm845_YYYYMMDD.tar.xz
-            simg2img kali_phosh_sdm845_YYYYMMDD.img rootfs_ext4.img
+            tar -xpf kali_phosh_{SOC}_{DATE}.tar.xz
+            simg2img kali_phosh_{SOC}_{DATE}.img rootfs_ext4.img
             dd if=rootfs_ext4.img of=/dev/sdX bs=1M oflag=sync status=progress
             and at last, flash boot.img using fastboot
             fastboot flash boot boot-{model}.img
@@ -91,8 +91,8 @@ jobs:
             ### Install on EMMC (fastboot method):
             **Boot your device into fastboot and run below commands:**
             ```
-            tar -xpf kali_phosh_sdm845_YYYYMMDD.tar.xz
-            fastboot flash userdata kali_phosh_sdm845_YYYYMMDD.img
+            tar -xpf kali_phosh_{SOC}_{DATE}.tar.xz
+            fastboot flash userdata kali_phosh_{SOC}_{DATE}.img
             fastboot flash boot boot-{model}.img
             ```
             ### WARNING: This will wipe your phone. So, I won't recommend to flash it in your daily driver, but if your device supports external sdcard, go ahead (-;

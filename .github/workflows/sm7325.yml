@@ -15,22 +15,18 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y debootstrap systemd-container rsync qemu-user-static bmap-tools android-sdk-libsparse-utils
-          git clone https://github.com/Shubhamvis98/kali-pinephone -b wip build
+          git clone https://github.com/Shubhamvis98/kali-pinephone build
           cp custom.sh build
-          cd build
-          #patch -p1 < ../my.patch
 
       - name: Download base.tgz
         run: |
-          pip install gdown
-          gdown --fuzzy 'https://drive.google.com/file/d/1-jYrR55zzr0K0YCTaZ0tU4OM_sW2yYkF/view?usp=sharing' -O build/base.tgz
+          bash base.url
 
       - name: Build
         run: |
           cd build
           chmod +x build.sh
           sudo ./build.sh -t sm7325 -s custom.sh
-          sudo xz kali_phosh*img
           sha1sum *.img* > sha1sum
 
       - uses: actions/upload-artifact@v4
@@ -43,7 +39,7 @@ jobs:
             build/sha1sum
 
   release:
-    name: Create Release
+    name: Release
     runs-on: ubuntu-latest
     needs: build
     steps:
@@ -81,9 +77,8 @@ jobs:
 
             ### Install on EMMC:
             ```
-            tar -xpf kali_phosh_SOC_YYYYMMDD.tar.xz
-            simg2img kali_phosh_SOC_YYYYMMDD.img rootfs_ext4.img
-            fastboot flash userdata kali_phosh_SOC_YYYYMMDD.img
+            tar -xpf kali_phosh_{SOC}_{DATE}.tar.xz
+            fastboot flash userdata kali_phosh_{SOC}_{DATE}.img
             fastboot flash boot boot-{model}.img
             ```
 
