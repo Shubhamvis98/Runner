@@ -40,7 +40,7 @@ jobs:
             build/sha1sum
 
   release:
-    name: Create Release
+    name: Release
     runs-on: ubuntu-latest
     needs: build
     steps:
