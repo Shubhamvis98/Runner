@@ -81,7 +81,6 @@ jobs:
             fastboot flash userdata kali_phosh_{SOC}_{DATE}.img
             fastboot flash boot boot-{model}.img
             ```
-
             ### WARNING: This will wipe your phone. So, I won't recommend to flash it in your daily driver, but if your device supports external sdcard, go ahead (-;
 
             #### Create an issue if you see any bug in the release
