@@ -54,6 +54,10 @@ jobs:
         with:
           name: release-artifacts
 
+      - name: List Files
+        run: |
+          ls -lh
+
       - name: Upload Release
         uses: softprops/action-gh-release@v1
         with:
