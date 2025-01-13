@@ -2,6 +2,7 @@
 
 # Nothing Phone (1)
 curl 'https://salsa.debian.org/DebianOnMobile-team/qcom-phone-utils/-/raw/debian/latest/initramfs-tools/hooks/qcom-firmware?ref_type=heads' > /usr/share/initramfs-tools/hooks/qcom-firmware
+curl 'https://gitlab.com/mobian1/droid-juicer/-/raw/master/configs/nothing,spacewar.toml?ref_type=heads' | grep -v 'ipa_fws' > /usr/share/droid-juicer/configs/nothing,spacewar.toml
 
 export DEBIAN_FRONTEND=noninteractive
 mytmp=/ztmpz
