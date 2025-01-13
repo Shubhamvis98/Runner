@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Nothing Phone (1)
+curl 'https://salsa.debian.org/DebianOnMobile-team/qcom-phone-utils/-/raw/debian/latest/initramfs-tools/hooks/qcom-firmware?ref_type=heads' > /usr/share/initramfs-tools/hooks/qcom-firmware
+
 export DEBIAN_FRONTEND=noninteractive
 mytmp=/ztmpz
 
