@@ -47,7 +47,7 @@ jobs:
       - name: Set Custom Variables
         id: vars
         run: |
-          echo "date=$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+          echo "date=PP-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
           echo "repository=shubhamvis98/kali-pinephone" >> $GITHUB_OUTPUT
 
       - name: Download Artifacts
