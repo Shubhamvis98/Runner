@@ -1,0 +1,16 @@
+name: Arm Image Check
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    name: Build Image(s)
+    permissions: write-all
+    runs-on: ubuntu-24.04-arm
+    # timeout-minutes: 200
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clone Repository
+        run: |
+          uname -a
