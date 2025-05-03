@@ -1,0 +1,92 @@
+name: Kali PinePhone/Pro Release
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    name: Build Image(s)
+    permissions: write-all
+    runs-on: ubuntu-24.04-arm
+    # timeout-minutes: 200
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clone Repository
+        run: |
+          sudo apt update
+          sudo apt install -y debootstrap systemd-container rsync qemu-user-static bmap-tools android-sdk-libsparse-utils
+          git clone https://github.com/Shubhamvis98/kali-pinephone build
+          cp custom.sh build
+
+      - name: Build
+        run: |
+          cd build
+          chmod +x build.sh
+          sudo bash -e ./build.sh -cb -t pinephone -s custom.sh
+          sudo bash -e ./build.sh -cb -t pinephonepro -s custom.sh
+          sha1sum *.img* > sha1sum
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-artifacts
+          if-no-files-found: warn
+          retention-days: 7
+          path: |
+            build/*.img*
+            build/sha1sum
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Set Custom Variables
+        id: vars
+        run: |
+          echo "tag=PP-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+          echo "date=$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+          echo "repository=shubhamvis98/kali-pinephone" >> $GITHUB_OUTPUT
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: release-artifacts
+
+      - name: Upload Release
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: true
+          generate_release_notes: false
+          prerelease: false
+          token: ${{ secrets.RELEASE_TOKEN }}
+          repository: ${{ steps.vars.outputs.repository }}
+          tag_name: ${{ steps.vars.outputs.tag }}
+          name: PinePhone/Pro Release ${{ steps.vars.outputs.date }}
+          files: |
+            *.img*
+            sha1sum
+          body: |
+            **Default User/Pass:** kali/8888
+
+            ### Installation:
+
+            #### From PinePhone/Pro:
+            ```
+            unxz ${IMAGE_FILE}.xz && bmaptool copy ${IMAGE_FILE} /dev/mmcblkX
+            or
+            unxz -c ${IMAGE_FILE}.xz | dd of=/dev/mmcblkX bs=1M oflag=sync status=progress
+            X: Storage Device
+            ```
+
+            #### From PC [Use Tow-Boot's Mass Storage]:
+            While booting press Vol-up to boot into Mass Storage, led color will be blue
+            ```
+            unxz ${IMAGE_FILE}.xz && bmaptool copy ${IMAGE_FILE} /dev/sdX
+            or
+            unxz -c ${IMAGE_FILE}.xz | dd of=/dev/sdX bs=1M oflag=sync status=progress
+            X: Storage Device
+            ```
+
+            #### Please install Tow-Boot if boot fails
+            #### Create an issue if you see any bug in the release
+            ![GitHub release (by tag)](https://img.shields.io/github/downloads/${{ steps.vars.outputs.repository }}/${{ steps.vars.outputs.tag }}/total?label=Downloads)
