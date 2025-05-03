@@ -1,4 +1,4 @@
-name: Kali PinePhone/Pro Release
+name: Kali PinePhone/Pro Release ARM Runner
 
 on: [workflow_dispatch]
 
