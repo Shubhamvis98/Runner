@@ -16,6 +16,7 @@ wget https://github.com/Shubhamvis98/PinePhone_Tweaks/raw/main/ttyescape.tar.gz 
   tar -C / -xpf ttyesc.tgz && \
   systemctl enable hkdm
 
+exit 0
 # Install kalitorify
 cd $mytmp
 apt install -y tor iptables
