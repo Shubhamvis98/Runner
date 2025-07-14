@@ -1,4 +1,4 @@
-name: Kali SDM845 Release ARM Runner
+name: Kali QCOM Release ARM Runner
 
 on: [workflow_dispatch]
 
@@ -42,7 +42,7 @@ jobs:
       - name: Set Custom Variables
         id: vars
         run: |
-          echo "tag=SDM845-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
+          echo "tag=QCOM-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
           echo "date=$(date +%Y%m%d)" >> $GITHUB_OUTPUT
           echo "repository=shubhamvis98/kali-pinephone" >> $GITHUB_OUTPUT
 
@@ -60,7 +60,7 @@ jobs:
           token: ${{ secrets.RELEASE_TOKEN }}
           repository: ${{ steps.vars.outputs.repository }}
           tag_name: ${{ steps.vars.outputs.tag }}
-          name: SDM845 Release ${{ steps.vars.outputs.date }}
+          name: QCOM Release ${{ steps.vars.outputs.date }}
           files: |
             *.img*
             sha1sum
@@ -74,7 +74,7 @@ jobs:
             - Xiaomi Poco F1 (beryllium ebbg/tianma)
             - Oneplus 6 (enchilada)
             - Oneplus 6T (fajita)
-            - Xiaomi Mi MIX 2S (polaris)
+            - Fairphone 4 (fp4)
 
             ### Install on SDCard:
             ```
