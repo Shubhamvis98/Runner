@@ -15,3 +15,4 @@ cd $mytmp
 wget https://github.com/Shubhamvis98/PinePhone_Tweaks/raw/main/ttyescape.tar.gz -O ttyesc.tgz && \
   tar -C / -xpf ttyesc.tgz && \
   systemctl enable hkdm
+
