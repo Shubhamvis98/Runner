@@ -22,7 +22,7 @@ jobs:
         run: |
           cd build
           chmod +x build.sh
-          sudo bash -e ./build.sh -c -t sdm845 -s custom.sh
+          sudo bash -e ./build.sh -c -t qcom -s custom.sh
           sha1sum *.img* > sha1sum
 
       - uses: actions/upload-artifact@v4
