@@ -1,8 +1,9 @@
 name: Kali PinePhone/Pro Release ARM Runner
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '45 19 * * 6'
+    - cron: '0 0 * * 0'
 
 jobs:
   build:
