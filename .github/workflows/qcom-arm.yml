@@ -79,6 +79,10 @@ jobs:
             - Oneplus 6T (fajita)
             - Fairphone 4 (fp4)
 
+            **Added two additional boot images for beryllium with aftermarket display replacements.**
+            - tianmaft (tianma panel with focaltech touchscreen)
+            - ebbgnt (ebbg panel with novatech touchscreen)
+
             ### Install on SDCard:
             ```
             tar -xpf kali_phosh_{SOC}_{DATE}.tar.xz
