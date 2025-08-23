@@ -56,7 +56,7 @@ jobs:
         with:
           draft: false
           generate_release_notes: false
-          prerelease: yes
+          prerelease: true
           token: ${{ secrets.RELEASE_TOKEN }}
           repository: ${{ steps.vars.outputs.repository }}
           tag_name: ${{ steps.vars.outputs.tag }}
