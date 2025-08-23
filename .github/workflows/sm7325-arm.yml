@@ -22,7 +22,7 @@ jobs:
         run: |
           cd build
           chmod +x build.sh
-          sudo bash -e ./build.sh -c -t sm7325 -s custom.sh
+          sudo bash -e ./build.sh -c -t sm7325 -s custom.sh -M 'http://kali.download/kali'
           sha1sum *.img* > sha1sum
 
       - uses: actions/upload-artifact@v4
