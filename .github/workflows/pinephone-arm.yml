@@ -58,7 +58,7 @@ jobs:
       - name: Upload Release
         uses: softprops/action-gh-release@v1
         with:
-          draft: true
+          draft: false
           generate_release_notes: false
           prerelease: false
           token: ${{ secrets.RELEASE_TOKEN }}
